@@ -5,17 +5,19 @@
  */
 if(isset($_POST['form'])){
     parse_str($_POST['form'],$fields);
-}
-if(isset($fields['b']) && isset($fields['mode'])){
-    if($fields['mode'] == 'e'){
-        echo base64_encode($fields['b']);
-    } elseif($fields['mode'] == 'd'){
-        echo base64_decode($fields['b']);
-    } else {
-        echo "Ошибка, не выбран режим";
+//    var_dump($_POST);exit;
+    if(isset($fields['b']) && isset($fields['mode'])){
+        if($fields['mode'] == 'e'){
+            echo base64_encode($fields['b']);
+        } elseif($fields['mode'] == 'd'){
+            echo base64_decode($fields['b']);
+        } else {
+            echo "Ошибка, не выбран режим";
+        }
     }
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +45,8 @@ if(isset($fields['b']) && isset($fields['mode'])){
 </script>
 </head>
     <body>
-        <div class="container"
-            <form class="form-horizontal">
+        <div class="container">
+            <form class="form-horizontal" id="form">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="enc">Текст:</label>
                     <textarea class="form-control" id="enc" name="b" placeholder="Ввод"></textarea>
@@ -55,7 +57,7 @@ if(isset($fields['b']) && isset($fields['mode'])){
                 </div>
                 <div class="form-group">
                     <div class="form-group">
-                        <button type="button" class="btn btn-default" onclick="c($(this).closest('form').serialize(),event)">Submit</button>
+                        <button type="button" class="btn btn-default" onclick="c($(this).closest('#form').serialize(),event)">Submit</button>
                     </div>
                 </div>
             </form>
